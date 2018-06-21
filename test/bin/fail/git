@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+// This is a mock git executable for testing purposes
+
+throw new Error('git encountered an issue');

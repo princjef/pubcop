@@ -1,0 +1,13 @@
+node_modules/
+.nyc_output/
+.vscode/
+coverage/
+
+src/
+test/
+dist/**/*.spec.*
+
+*.tgz
+npm-debug.log*
+heapdump-*
+/*.json

@@ -1,7 +1,6 @@
 {
   "name": "pubcop",
   "version": "1.0.0",
-  "private": true,
   "description": "Package publishing done right, guaranteed",
   "homepage": "https://github.com/princjef/pubcop#readme",
   "repository": {
@@ -11,8 +10,6 @@
   "bugs": {
     "url": "https://github.com/princjef/pubcop/issues"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "bin": {
     "pubcop": "./dist/pubcop.js"
   },
@@ -24,15 +21,14 @@
     "prebuild": "npm run clean && npm run lint",
     "build": "tsc",
     "watch": "tsc -w",
-    "pretest": "printenv && npm run build",
-    "test": "nyc ava dist/**/*.spec.js",
+    "pretest": "npm run build",
+    "test": "nyc ava dist/**/*.spec.js --serial",
     "pretest-nocover": "npm run build",
     "test-nocover": "ava dist/**/*.spec.js",
     "show-coverage": "opener ./coverage/index.html",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "prerelease": "npm run build",
-    "release": "semantic-release",
-    "prepublishOnly": "./dist/pubcop.js"
+    "release": "semantic-release"
   },
   "keywords": [
     "npm",
@@ -43,7 +39,13 @@
   ],
   "author": "Jeff Principe <princjef@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "log-symbols": "^2.2.0",
+    "markdown-it": "^8.4.1",
+    "pkg-dir": "^3.0.0",
+    "yargs": "^11.0.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
@@ -53,13 +55,20 @@
     "@semantic-release/git": "^5.0.0",
     "@semantic-release/github": "^4.2.17",
     "@semantic-release/npm": "^3.3.1",
+    "@types/log-symbols": "^2.0.0",
+    "@types/markdown-it": "0.0.4",
     "@types/node": "^10.3.4",
+    "@types/pkg-dir": "^2.0.0",
+    "@types/strip-ansi": "^3.0.0",
+    "@types/yargs": "^11.0.0",
     "ava": "^0.25.0",
     "codecov": "^3.0.2",
     "husky": "^0.14.3",
+    "nyc": "^12.0.2",
     "opener": "^1.4.3",
     "rimraf": "^2.6.2",
     "semantic-release": "^15.5.5",
+    "strip-ansi": "^4.0.0",
     "tslint": "^5.10.0",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.9.2"
@@ -80,26 +89,26 @@
       "dist/**/*.map*"
     ],
     "check-coverage": true,
-    "lines": 85,
-    "statements": 85,
-    "functions": 85,
-    "branches": 75,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
     "watermarks": {
       "lines": [
-        80,
-        90
+        99,
+        100
       ],
       "statements": [
-        80,
-        90
+        99,
+        100
       ],
       "functions": [
-        80,
-        90
+        99,
+        100
       ],
       "branches": [
-        80,
-        90
+        99,
+        100
       ]
     }
   },

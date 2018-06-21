@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+// This is a mock git executable for testing purposes
+
+if (process.argv.slice(2).join(' ') === 'rev-parse --abbrev-ref HEAD') {
+    console.log('dev');
+} else {
+    throw new Error('unrecognized command');
+}
