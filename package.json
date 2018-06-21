@@ -1,7 +1,7 @@
 {
   "name": "pubcop",
   "version": "1.0.0",
-  "description": "Package publishing done right, guaranteed",
+  "description": "Publish with confidence",
   "homepage": "https://github.com/princjef/pubcop#readme",
   "repository": {
     "type": "git",
