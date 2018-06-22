@@ -7,8 +7,8 @@ import stripAnsi = require('strip-ansi');
 import * as logSymbols from 'log-symbols';
 
 test('validates everything by default', async t => {
-    const { success, output } = await execute('');
-    t.true(success);
+    const { error, output } = await execute('');
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true,
         branch: true,
@@ -17,32 +17,32 @@ test('validates everything by default', async t => {
 });
 
 test('validates the tag if requested', async t => {
-    const { success, output } = await execute('--checks tag');
-    t.true(success);
+    const { error, output } = await execute('--checks tag');
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true
     });
 });
 
 test('validates the changelog if requested', async t => {
-    const { success, output } = await execute('--checks changelog');
-    t.true(success);
+    const { error, output } = await execute('--checks changelog');
+    t.falsy(error);
     validateOutput(t, output, {
         changelog: true
     });
 });
 
 test('validates the branch if requested', async t => {
-    const { success, output } = await execute('--checks branch');
-    t.true(success);
+    const { error, output } = await execute('--checks branch');
+    t.falsy(error);
     validateOutput(t, output, {
         branch: true
     });
 });
 
 test('performs multiple validations if specified', async t => {
-    const { success, output } = await execute('--checks tag branch');
-    t.true(success);
+    const { error, output } = await execute('--checks tag branch');
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true,
         branch: true
@@ -50,8 +50,8 @@ test('performs multiple validations if specified', async t => {
 });
 
 test('validates everything if passed --all', async t => {
-    const { success, output } = await execute('--checks all');
-    t.true(success);
+    const { error, output } = await execute('--checks all');
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true,
         changelog: true,
@@ -60,76 +60,76 @@ test('validates everything if passed --all', async t => {
 });
 
 test('fails if no version is provided', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmVersion: null
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {});
 });
 
 test('fails if no args are provided', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmArgs: null
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {});
 });
 
 test('fails if the args are empty', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmArgs: []
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {});
 });
 
 test('fails when run outside of a node project', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         cwd: path.join(__dirname, '../../')
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {});
 });
 
 test('does nothing during install', async t => {
     for (const command of ['install', 'i', 'ci', 'it', 'cit']) {
-        const { success, output } = await execute('', {
+        const { error, output } = await execute('', {
             npmArgs: [command]
         });
-        t.true(success);
+        t.falsy(error);
         validateOutput(t, output, {});
     }
 });
 
 test('does nothing during pack', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmArgs: ['pack']
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {});
 });
 
 test('fails for other commands', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmArgs: ['test']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {});
 });
 
 test('ignores the run variant of pack', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmArgs: ['run', 'pack']
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {});
 });
 
 test('allows the run variant of publish', async t => {
-    const { success, output } = await execute('', {
+    const { error, output } = await execute('', {
         npmArgs: ['run', 'publish']
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true,
         branch: true,
@@ -138,226 +138,226 @@ test('allows the run variant of publish', async t => {
 });
 
 test('tag: fails if a tag is not used for a prerelease version', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0-beta.0'
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: fails if a tag is not used for a version with metadata', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0+sha.abcd'
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: fails if a tag is used for a standard version', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: fails if the wrong tag is used for the given version', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0-alpha.0',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: uses the first prerelease identifier to check the tag', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0-beta.alpha.0',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true
     });
 });
 
 test('tag: fails if the first prerelease identifier does not match the tag', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0-alpha.beta.0',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: allows metadata on prerelease versions', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.0.0-beta.0+sha.abcd',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true
     });
 });
 
 test('tag: fails if the versions is not valid semver', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: 'not-valid-beta.0',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: fails if the versions is not valid semver (empty prerelease identifier)', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmVersion: '1.2.3-beta..0',
         npmArgs: ['publish', '--tag', 'beta']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         tag: false
     });
 });
 
 test('tag: fails if the tag option is provided with no value in the publish command', async t => {
-    const { success, output } = await execute('--checks tag', {
+    const { error, output } = await execute('--checks tag', {
         npmArgs: ['publish', '--tag']
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {});
 });
 
 test('tag: allows a custom list of standard tags', async t => {
-    const { success, output } = await execute('--checks tag --standard-tags next latest', {
+    const { error, output } = await execute('--checks tag --standard-tags next latest', {
         npmArgs: ['publish', '--tag', 'next']
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         tag: true
     });
 });
 
 test('changelog: handles annotated changelog entries', async t => {
-    const { success, output } = await execute('--checks changelog', {
+    const { error, output } = await execute('--checks changelog', {
         npmVersion: '1.1.0'
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         changelog: true
     });
 });
 
 test('changelog: allows a custom changelog path', async t => {
-    const { success, output } = await execute('--checks changelog --changelog-path ../changelog/CHANGELOG.md', {
+    const { error, output } = await execute('--checks changelog --changelog-path ../changelog/CHANGELOG.md', {
         npmVersion: '1.1.0',
         cwd: path.join(__dirname, '../test/package/empty')
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         changelog: true
     });
 });
 
 test('changelog: ignores prerelease versions', async t => {
-    const { success, output } = await execute('--checks changelog', {
+    const { error, output } = await execute('--checks changelog', {
         npmVersion: '1.2.0-beta.0'
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         changelog: true
     });
 });
 
 test('changelog: fails if no changelog is present', async t => {
-    const { success, output } = await execute('--checks changelog', {
+    const { error, output } = await execute('--checks changelog', {
         cwd: path.join(__dirname, '../test/package/empty')
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         changelog: false
     });
 });
 
 test('changelog: fails if the changelog is not readable', async t => {
-    const { success, output } = await execute('--checks changelog', {
+    const { error, output } = await execute('--checks changelog', {
         cwd: path.join(__dirname, '../test/package/changelog-dir')
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         changelog: false
     });
 });
 
 test('changelog: fails if the version is not present in the changelog', async t => {
-    const { success, output } = await execute('--checks changelog', {
+    const { error, output } = await execute('--checks changelog', {
         npmVersion: '1.2.0'
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         changelog: false
     });
 });
 
 test('branch: allows a different release branch to be specified', async t => {
-    const { success, output } = await execute('--checks branch --branch-name dev', {
+    const { error, output } = await execute('--checks branch --branch-name dev', {
         path: path.join(__dirname, '../test/bin/dev')
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         branch: true
     });
 });
 
 test('branch: allows multiple release branches to be specified', async t => {
-    const { success, output } = await execute('--checks branch --branch-name dev something-else', {
+    const { error, output } = await execute('--checks branch --branch-name dev something-else', {
         path: path.join(__dirname, '../test/bin/dev')
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         branch: true
     });
 });
 
 test('branch: ignores prerelease versions', async t => {
-    const { success, output } = await execute('--checks branch --branch-name nonexistant', {
+    const { error, output } = await execute('--checks branch --branch-name nonexistant', {
         npmVersion: '1.0.0-beta.0'
     });
-    t.true(success);
+    t.falsy(error);
     validateOutput(t, output, {
         branch: true
     });
 });
 
 test('branch: fails when publishing a standard version on the branch other than the provided one', async t => {
-    const { success, output } = await execute('--checks branch --branch-name other', {
+    const { error, output } = await execute('--checks branch --branch-name other', {
         npmVersion: '1.0.0'
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         branch: false
     });
 });
 
 test('branch: fails if git is not found or fails', async t => {
-    const { success, output } = await execute('--checks branch', {
+    const { error, output } = await execute('--checks branch', {
         path: path.join(__dirname, '../test/bin/fail')
     });
-    t.false(success);
+    t.truthy(error);
     validateOutput(t, output, {
         branch: false
     });
@@ -401,7 +401,7 @@ for (const [key, value] of Object.entries(process.env)) {
     }
 }
 
-async function execute(args: string, options?: { path?: string; cwd?: string; npmVersion?: string | null; npmArgs?: string[] | null }): Promise<{ success: boolean; output: string[]; }> {
+async function execute(args: string, options?: { path?: string; cwd?: string; npmVersion?: string | null; npmArgs?: string[] | null }): Promise<{ error: boolean; output: string[]; }> {
     options = options || {};
 
     const env: NodeJS.ProcessEnv = {
@@ -426,7 +426,7 @@ async function execute(args: string, options?: { path?: string; cwd?: string; np
     const executable = path.relative(cwd, path.join(__dirname, 'pubcop.js'));
 
     let output: string;
-    let success = true;
+    let error: any | undefined = undefined;
     try {
         output = (await util.promisify(child_process.exec)(`${executable} ${args}`, {
             encoding: 'utf8',
@@ -435,11 +435,11 @@ async function execute(args: string, options?: { path?: string; cwd?: string; np
         })).stdout;
     } catch (e) {
         output = e.stdout;
-        success = false;
+        error = e;
     }
 
     return {
-        success,
+        error,
         output: stripAnsi(output).split('\n').map(l => l.trim())
     };
 }
