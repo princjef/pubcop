@@ -21,7 +21,7 @@
     "prebuild": "npm run clean && npm run lint",
     "build": "tsc",
     "watch": "tsc -w",
-    "pretest": "npm run build && node fix-permissions.js ./dist/pubcop.js ./test/bin/master/git ./test/bin/dev/git",
+    "pretest": "npm run build && node fix-permissions.js ./dist/pubcop.js ./test/bin/master/git ./test/bin/dev/git ./test/bin/fail/git",
     "test": "nyc ava dist/**/*.spec.js --serial",
     "pretest-nocover": "npm run build",
     "test-nocover": "ava dist/**/*.spec.js",
@@ -89,10 +89,10 @@
       "dist/**/*.map*"
     ],
     "check-coverage": true,
-    "lines": 99,
-    "statements": 99,
-    "functions": 99,
-    "branches": 99,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
     "watermarks": {
       "lines": [
         99,
