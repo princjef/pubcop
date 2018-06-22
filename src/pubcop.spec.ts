@@ -353,10 +353,12 @@ test('branch: fails when publishing a standard version on the branch other than 
     });
 });
 
-test('branch: fails if git is not found or fails', async t => {
+test.only('branch: fails if git is not found or fails', async t => {
     const { error, output } = await execute('--checks branch', {
         path: path.join(__dirname, '../test/bin/fail')
     });
+    console.log(error);
+    console.log(output);
     t.truthy(error);
     validateOutput(t, output, {
         branch: false
