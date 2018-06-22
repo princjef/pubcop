@@ -11,3 +11,4 @@ dist/**/*.spec.*
 npm-debug.log*
 heapdump-*
 /*.json
+/*.js
