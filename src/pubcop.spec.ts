@@ -2,7 +2,7 @@ import * as child_process from 'child_process';
 import * as path from 'path';
 import * as util from 'util';
 
-import test, { GenericTestContext, Context } from 'ava';
+import test, { ExecutionContext } from 'ava';
 import stripAnsi = require('strip-ansi');
 import * as logSymbols from 'log-symbols';
 
@@ -363,7 +363,7 @@ test('branch: fails if git is not found or fails', async t => {
     });
 });
 
-function validateOutput(t: GenericTestContext<Context<any>>, output: string[], checks: { [K in ('tag' | 'changelog' | 'branch')]?: boolean }): void {
+function validateOutput(t: ExecutionContext<any>, output: string[], checks: { [K in ('tag' | 'changelog' | 'branch')]?: boolean }): void {
     const successText = {
         tag: stripAnsi(`${logSymbols.success} Tag`),
         changelog: stripAnsi(`${logSymbols.success} Changelog`),
