@@ -1,7 +1,7 @@
 # pubcop
 
-[![Travis CI build status](https://travis-ci.org/princjef/pubcop.svg?branch=master)](https://travis-ci.org/princjef/pubcop)
-[![codecov](https://codecov.io/gh/princjef/pubcop/branch/master/graph/badge.svg)](https://codecov.io/gh/princjef/pubcop)
+[![Build Status](https://dev.azure.com/princjef/github-ci/_apis/build/status/princjef.pubcop?branchName=master)](https://dev.azure.com/princjef/github-ci/_build/latest?definitionId=1&branchName=master)
+[![Code Coverage](https://img.shields.io/azure-devops/coverage/princjef/github-ci/5.svg)](https://dev.azure.com/princjef/github-ci/_build/latest?definitionId=5&branchName=master&view=codecoverage-tab)
 [![npm version](https://img.shields.io/npm/v/pubcop.svg)](https://npmjs.org/package/pubcop)
 
 Verifies common oversights and mistakes during publishing automatically so you can publish with confidence. Includes the following built-in checks. Each check can be configured and turned on or off:

@@ -23,10 +23,11 @@
     "watch": "tsc -w",
     "pretest": "npm run build && node fix-permissions.js ./dist/pubcop.js ./test/bin/master/git ./test/bin/dev/git ./test/bin/fail/git",
     "test": "nyc ava dist/**/*.spec.js --serial",
+    "pretest-ci": "npm run pretest",
+    "test-ci": "nyc ava dist/**/*.spec.js --serial --tap | tap-xunit > junit.xml",
     "pretest-nocover": "npm run build",
     "test-nocover": "ava dist/**/*.spec.js",
-    "show-coverage": "opener ./coverage/index.html",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "coverage": "opener ./coverage/index.html",
     "prerelease": "npm run build",
     "release": "semantic-release"
   },
@@ -50,7 +51,6 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@commitlint/prompt-cli": "^7.0.0",
-    "@commitlint/travis-cli": "^7.0.0",
     "@semantic-release/changelog": "^2.0.2",
     "@semantic-release/git": "^5.0.0",
     "@semantic-release/github": "^4.2.17",
@@ -62,7 +62,6 @@
     "@types/strip-ansi": "^3.0.0",
     "@types/yargs": "^11.0.0",
     "ava": "^0.25.0",
-    "codecov": "^3.0.2",
     "commitlint-azure-pipelines-cli": "^1.0.1",
     "husky": "^0.14.3",
     "nyc": "^12.0.2",
@@ -70,6 +69,7 @@
     "rimraf": "^2.6.2",
     "semantic-release": "^15.5.5",
     "strip-ansi": "^4.0.0",
+    "tap-xunit": "^2.3.0",
     "tslint": "^5.10.0",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.9.2"
@@ -79,7 +79,8 @@
     "reporter": [
       "text",
       "html",
-      "json"
+      "json",
+      "cobertura"
     ],
     "include": [
       "dist/**/*.js"
