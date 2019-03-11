@@ -39,7 +39,7 @@ jobs:
         displayName: Use Node.js $(nodeVersion)
       - script: npm ci
         displayName: Install Dependencies
-      - script: npm test
+      - script: npm run test-ci
         displayName: Run Tests
       - task: PublishTestResults@2
         condition: succeededOrFailed()
