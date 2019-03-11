@@ -1,6 +1,6 @@
 # pubcop
 
-[![Build Status](https://dev.azure.com/princjef/github-ci/_apis/build/status/princjef.pubcop?branchName=master)](https://dev.azure.com/princjef/github-ci/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/princjef/github-ci/_apis/build/status/princjef.pubcop?branchName=master)](https://dev.azure.com/princjef/github-ci/_build/latest?definitionId=5&branchName=master)
 [![Code Coverage](https://img.shields.io/azure-devops/coverage/princjef/github-ci/5.svg)](https://dev.azure.com/princjef/github-ci/_build/latest?definitionId=5&branchName=master&view=codecoverage-tab)
 [![npm version](https://img.shields.io/npm/v/pubcop.svg)](https://npmjs.org/package/pubcop)
 
