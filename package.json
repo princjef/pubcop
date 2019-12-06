@@ -14,7 +14,6 @@
     "pubcop": "./dist/pubcop.js"
   },
   "scripts": {
-    "commit": "commit",
     "lint": "tslint --project tsconfig.json --fix",
     "clean": "rimraf dist",
     "prebuild": "npm run clean && npm run lint",
@@ -47,13 +46,12 @@
     "yargs": "^13.2.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.5.2",
-    "@commitlint/config-conventional": "^7.5.0",
-    "@commitlint/prompt-cli": "^7.5.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
     "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/npm": "^5.3.4",
     "@types/log-symbols": "^2.0.0",
     "@types/markdown-it": "0.0.7",
     "@types/node": "^10.12.30",
@@ -66,7 +64,7 @@
     "nyc": "^13.3.0",
     "opener": "^1.5.1",
     "rimraf": "^2.6.3",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^15.13.31",
     "strip-ansi": "^5.1.0",
     "tap-xunit": "^2.3.0",
     "tslint": "^5.13.1",

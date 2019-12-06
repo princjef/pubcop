@@ -83,13 +83,7 @@ npm run show-coverage
 
 This project uses the [Angular commit style][angular commit style] for
 generating changelogs and determining release versions. Any pull request with
-commits that don't follow this style will fail continuous integration. If you're
-not familiar with the style, you can run the following instead of the standard
-`git commit` to get a guided walkthrough to generating your commit message:
-
-```
-npm run commit
-```
+commits that don't follow this style will fail continuous integration.
 
 [issues]: https://github.com/princjef/pubcop/issues
 [new pull request]: https://github.com/princjef/pubcop/compare
