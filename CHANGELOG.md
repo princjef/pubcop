@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/princjef/pubcop/compare/v1.0.1...v1.0.2) (2019-12-12)
+
+
+### Bug Fixes
+
+* **deps:** update all deps to latest, fix vulnerabilities ([#12](https://github.com/princjef/pubcop/issues/12)) ([b0c0b9d](https://github.com/princjef/pubcop/commit/b0c0b9d88ca97199c25343956b50d7829b8cfaf9))
+
 ## [1.0.1](https://github.com/princjef/pubcop/compare/v1.0.0...v1.0.1) (2019-12-06)
 
 
