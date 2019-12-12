@@ -4,21 +4,22 @@
 [![Code Coverage](https://img.shields.io/azure-devops/coverage/princjef/github-ci/5.svg)](https://dev.azure.com/princjef/github-ci/_build/latest?definitionId=5&branchName=master&view=codecoverage-tab)
 [![npm version](https://img.shields.io/npm/v/pubcop.svg)](https://npmjs.org/package/pubcop)
 
-Verifies common oversights and mistakes during publishing automatically so you can publish with confidence. Includes the following built-in checks. Each check can be configured and turned on or off:
+Verifies common oversights and mistakes during publishing automatically so you
+can publish with confidence. Includes the following built-in checks. Each check
+can be configured and turned on or off:
 
- * **Tag** - Make sure that prerelease versions (e.g. 1.2.3-beta.0) are 
-   published with the appropriate tag and that standard versions (e.g. 1.2.3) 
-   are published with one of the configured standard release tags.
+- **Tag** - Make sure that prerelease versions (e.g. 1.2.3-beta.0) are published
+  with the appropriate tag and that standard versions (e.g. 1.2.3) are published
+  with one of the configured standard release tags.
 
- * **Branch** - Require standard releases to be made from one or more 
-   predefined release branches. Prevents people from accidentally publishing a 
-   standard release from a feature branch that may not have all of the latest 
-   changes.
+- **Branch** - Require standard releases to be made from one or more predefined
+  release branches. Prevents people from accidentally publishing a standard
+  release from a feature branch that may not have all of the latest changes.
 
- * **Changelog** - Ensure that an entry is present in the package changelog 
-   when publishing standard releases. This makes sure that the changelog is 
-   kept in sync with the published versions of the package in situations where 
-   automated changelog generation is not used.
+- **Changelog** - Ensure that an entry is present in the package changelog when
+  publishing standard releases. This makes sure that the changelog is kept in
+  sync with the published versions of the package in situations where automated
+  changelog generation is not used.
 
 ## Usage
 
@@ -51,13 +52,13 @@ All of the options below can be mixed and matched to suit your needs.
 
 ### Select Specific Validations
 
-By default, pubcop will run all available checks on publish. You can specify 
-one or more specific checks to run using the `--checks` option to the pubcop 
-command. Valid values are `tag` `branch` and `changelog` (or `all` to enable 
-all checks).
+By default, pubcop will run all available checks on publish. You can specify one
+or more specific checks to run using the `--checks` option to the pubcop
+command. Valid values are `tag` `branch` and `changelog` (or `all` to enable all
+checks).
 
-The example below enables only the tag and branch validations, 
-skipping the changelog check.
+The example below enables only the tag and branch validations, skipping the
+changelog check.
 
 ```json
 {
@@ -102,9 +103,9 @@ you can set the following:
 
 #### Branch
 
-The branch validation prevents standard releases from being published from
-git branches other than the main release branch(es). By default, it requires
-that all standard releases be published from the `master` git branch. You can
+The branch validation prevents standard releases from being published from git
+branches other than the main release branch(es). By default, it requires that
+all standard releases be published from the `master` git branch. You can
 customize the list of standard release branches with the `--branch-name` option.
 
 The following will allow standard releases to be published from either the
