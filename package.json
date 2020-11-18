@@ -67,7 +67,7 @@
     "opener": "^1.5.1",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
-    "semantic-release": "^15.13.31",
+    "semantic-release": "^17.2.3",
     "strip-ansi": "^6.0.0",
     "tap-xunit": "^2.4.1",
     "tslint": "^5.20.1",
