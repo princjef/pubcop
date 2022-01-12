@@ -45,7 +45,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "log-symbols": "^3.0.0",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "pkg-dir": "^4.2.0",
     "yargs": "^15.0.2"
   },
